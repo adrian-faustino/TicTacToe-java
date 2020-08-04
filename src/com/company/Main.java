@@ -1,15 +1,22 @@
 package com.company;
 
+import jdk.swing.interop.SwingInterOpUtils;
+
 import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
         char[][] gameBoard = initGameBoard();
+        String turn = "player";
 
         printGameBoard(gameBoard);
-        // player user input
-        playUserInput(gameBoard, "player");
+        // get user move
+        int pos = getPlayerMove(turn);
+        // play user move
+        playUserInput(gameBoard, turn, pos);
+        // get CPU move
+        playUserInput(gameBoard, "CPU", 5);
         printGameBoard(gameBoard);
     }
 
@@ -33,16 +40,28 @@ public class Main {
         }
     }
 
+    // return int from player or a random num for CPU
+    public static int getPlayerMove (String user) {
+        int move;
+        if(user.equals("player")) {
+            Scanner scan = new Scanner(System.in);
+            System.out.println("Enter your move (1-9):");
+            move = scan.nextInt();
+        } else {
+            // todo: generate random num
+            move = 9;
+        }
+        return move;
+    }
+
     // player user input
-    public static void playUserInput(char[][] gameBoard, String user) {
-        char turnPiece = 'X';
+    public static void playUserInput(char[][] gameBoard, String user, int pos) {
+        char turnPiece;
         if(user.equals("player")) {
             turnPiece = 'X';
-        }
-
-        Scanner scan = new Scanner(System.in);
-        System.out.println("Enter your move (1-9):");
-        int pos = scan.nextInt();
+        } else {
+            turnPiece = 'O';
+        };
 
         switch (pos) {
             case 1:
@@ -71,6 +90,8 @@ public class Main {
                 break;
             case 9:
                 gameBoard[4][4] = turnPiece;
+                break;
+            default:
                 break;
         }
     }
