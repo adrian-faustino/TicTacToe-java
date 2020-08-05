@@ -9,15 +9,19 @@ public class Main {
     public static void main(String[] args) {
         char[][] gameBoard = initGameBoard();
         String turn = "player";
+        boolean winner = false;
 
-        printGameBoard(gameBoard);
-        // get user move
-        int pos = getPlayerMove(turn);
-        // play user move
-        playUserInput(gameBoard, turn, pos);
-        // get CPU move
-        playUserInput(gameBoard, "CPU", generateCPUMove(1, 9));
-        printGameBoard(gameBoard);
+        while (!winner) {
+            System.out.println();
+            printGameBoard(gameBoard);
+            // get user move
+            int pos = getPlayerMove(turn);
+            // play user move
+            playUserInput(gameBoard, turn, pos);
+            // get CPU move
+            playUserInput(gameBoard, "CPU", generateCPUMove(1, 9));
+            printGameBoard(gameBoard);
+        }
     }
 
     // initialize game board
