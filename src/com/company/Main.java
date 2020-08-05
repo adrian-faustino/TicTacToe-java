@@ -16,7 +16,7 @@ public class Main {
         // play user move
         playUserInput(gameBoard, turn, pos);
         // get CPU move
-        playUserInput(gameBoard, "CPU", 5);
+        playUserInput(gameBoard, "CPU", generateCPUMove(1, 9));
         printGameBoard(gameBoard);
     }
 
@@ -94,6 +94,12 @@ public class Main {
             default:
                 break;
         }
+    }
+
+    // return a random number within a range (for CPU move) All inclusive
+    public static int  generateCPUMove(int min, int max) {
+        int random_int = (int)(Math.random() * ((max - min) + 1)) + min;
+        return random_int;
     }
 
 
